@@ -15,6 +15,6 @@
 https://blog.csdn.net/bob__yuan/article/details/81778875  
 https://blog.csdn.net/bob__yuan/article/details/82191363
 
-下两图为用一个类似于烟囱形状的长方体模型，进行旋转的结果，因为是最基础的 Laplace Deformation 所以不是保体积的，旋转多次后会内缩
+下两图为用一个类似于烟囱形状的长方体模型，进行旋转的结果，因为是最基础的 Laplace Deformation 所以`不是保体积的`，旋转多次后会内缩
 <div align=center><img src="https://github.com/GaoYuanBob/LaplaceDeformation/raw/master/Sample%20Ressult.png"><div>
 <div align=center><img src="https://github.com/GaoYuanBob/LaplaceDeformation/blob/master/Laplace%20Deformation%20-%20Rotation.gif"><div>
