@@ -24,23 +24,18 @@ public:
 	std::vector<std::vector<int>> AdjacentVertices;
 
 	EditLaplaceDeformationPlugin();
-    virtual ~EditLaplaceDeformationPlugin() {}
+    virtual ~EditLaplaceDeformationPlugin() = default;	// resharper C++
 
-    static const QString Info();
+	static const QString Info();
 
-    bool StartEdit(MeshModel &/*m*/, GLArea * /*parent*/, MLSceneGLSharedDataContext* /*cont*/);
-    void EndEdit(MeshModel &/*m*/, GLArea * /*parent*/, MLSceneGLSharedDataContext* /*cont*/);
-	void Decorate(MeshModel &/*m*/, GLArea * /*parent*/, QPainter *p) {};
-	void Decorate (MeshModel &/*m*/, GLArea * ){};
-	void mousePressEvent(QMouseEvent *, MeshModel &, GLArea * ) {};
-	void mouseMoveEvent(QMouseEvent *, MeshModel &, GLArea * ) {};
-	void mouseReleaseEvent(QMouseEvent *event, MeshModel &/*m*/, GLArea *) {};
-	void keyReleaseEvent(QKeyEvent *, MeshModel &, GLArea *) {};
-	void drawFace(CMeshO::FacePointer fp, MeshModel &m, GLArea *gla, QPainter *p) {};
-	void drawVert(CMeshO::VertexPointer vp, MeshModel &m, GLArea *gla, QPainter *p) {};
+    bool StartEdit(MeshModel &/*m*/, GLArea * /*parent*/, MLSceneGLSharedDataContext* /*cont*/) override;	// resharper C++ 加了个 "override"
+    void EndEdit(MeshModel &/*m*/, GLArea * /*parent*/, MLSceneGLSharedDataContext* /*cont*/) override;
+	void Decorate(MeshModel &/*m*/, GLArea * /*parent*/, QPainter *p) override {};
+	void mousePressEvent(QMouseEvent *, MeshModel &, GLArea * ) override {};
+	void mouseMoveEvent(QMouseEvent *, MeshModel &, GLArea * ) override {};
+	void mouseReleaseEvent(QMouseEvent *event, MeshModel &/*m*/, GLArea *) override {};
+	void keyReleaseEvent(QKeyEvent *, MeshModel &, GLArea *) override {};
 
-
-	// GY
 	void LaplaceDeformation(MeshModel&);	// 依次调用下边函数
 
 	void toCaculateAdjacentVertices(CMeshO* cm);
@@ -51,7 +46,7 @@ public:
 
 	void setNewCoord(MeshModel&);	// 更新模型坐标，anchor点单独按照形变计算
 
-	void suggestedRenderingData(MeshModel &, MLRenderingData& dt);
+	void suggestedRenderingData(MeshModel &, MLRenderingData& dt) override;
 	
 	void ChimneyRotate(MeshModel &);
 
@@ -62,8 +57,6 @@ private:
 	int pickmode;
 	CMeshO::FacePointer   curFacePtr;
 	CMeshO::VertexPointer curVertPtr;
-	std::vector<CMeshO::FacePointer>   NewFaceSel;
-	std::vector<CMeshO::VertexPointer> NewVertSel;
 	int pIndex;
 	GLArea * gla;
 };
