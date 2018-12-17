@@ -5,7 +5,7 @@
 #include <eigenlib/Eigen/Cholesky>
 #include <fstream>
 
-using namespace std;	// MatrixXd ÖØÔØÁË std::cout << £¬Ö±½Ó cout << m << endl;¼´¿É
+using namespace std;	// MatrixXd é‡è½½äº† std::cout << ï¼Œç›´æ¥ cout << m << endl;å³å¯
 using namespace vcg;
 using Eigen::MatrixXf;
 using Eigen::VectorXf;
@@ -14,7 +14,6 @@ EditLaplaceDeformationPlugin::EditLaplaceDeformationPlugin(): gla(nullptr)
 {
 	qFont.setFamily("Helvetica");
 	qFont.setPixelSize(12);
-
 	haveToPick = false;
 	pickmode = 0; // 0 face 1 vertex
 	curFacePtr = 0;
@@ -27,7 +26,7 @@ const QString EditLaplaceDeformationPlugin::Info()
 	return tr("Laplace Deformation on a model!");
 }
 
-/// ²âÊÔÒ»¸ö³¤·½ÌåÁ½±ßË³Ê±ÕëĞı×ªµÄº¯Êı£¬Ö»ÊÇÓÃÓÚ²âÊÔ£¬Êµ¼ÊÊ¹ÓÃLaplace DeformationÓÃ²»µ½
+/// æµ‹è¯•ä¸€ä¸ªé•¿æ–¹ä½“ä¸¤è¾¹é¡ºæ—¶é’ˆæ—‹è½¬çš„å‡½æ•°ï¼Œåªæ˜¯ç”¨äºæµ‹è¯•ï¼Œå®é™…ä½¿ç”¨Laplace Deformationç”¨ä¸åˆ°
 void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 {
 	fixed_anchor_idx.clear();
@@ -40,7 +39,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 
 	int tmp;
 	ifstream move_anchor;
-	move_anchor.open(R"(C:\Users\Administrator\Desktop\top_anchor.txt)");	// "C:\Users\Administrator\Desktop\top_anchor.txt" Reshaper C++ ¸ÄµÄ
+	move_anchor.open(R"(C:\Users\Administrator\Desktop\top_anchor.txt)");	// "C:\Users\Administrator\Desktop\top_anchor.txt" Reshaper C++ æ”¹çš„
 	while (move_anchor >> tmp)
 		move_anchor_idx.push_back(tmp);
 	move_anchor.close();
@@ -51,7 +50,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 		fixed_anchor_idx.push_back(tmp);
 	fix_anchor.close();
 
-	// move_anchorÉèÎªºìÉ«£¬move_anchorÉèÎªÀ¶É«
+	// move_anchorè®¾ä¸ºçº¢è‰²ï¼Œmove_anchorè®¾ä¸ºè“è‰²
 	//for (CMeshO::VertexIterator vi = m.cm.vert.begin(); vi != m.cm.vert.end(); ++vi)
 	//	if (!vi->IsD())
 	//	{
@@ -62,8 +61,8 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	//			vi->C() = vcg::Color4b(vcg::Color4b::Blue);
 	//	}
 	
-//// test ²âÊÔĞı×ª¾ØÕóĞ´µÃ¶Ô²»¶Ô
-	//float angle = (45 * M_PI) / 180;	// Ã¿´ÎĞı×ª10¶È
+//// test æµ‹è¯•æ—‹è½¬çŸ©é˜µå†™å¾—å¯¹ä¸å¯¹
+	//float angle = (45 * M_PI) / 180;	// æ¯æ¬¡æ—‹è½¬10åº¦
 	//cout << "sin = " << sin(angle) << endl;
 	//cout << "cos = " << cos(angle) << endl << endl;
 	//for (CMeshO::VertexIterator vi = m.cm.vert.begin(); vi != m.cm.vert.end(); ++vi)
@@ -78,7 +77,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	//		printf("After Rotate, (%f, %f)\n\n", m.cm.vert[idx].P().X(), m.cm.vert[idx].P().Y());
 	//	}
 	//}
-//// test ²âÊÔĞı×ª¾ØÕóĞ´µÃ¶Ô²»¶Ô
+//// test æµ‹è¯•æ—‹è½¬çŸ©é˜µå†™å¾—å¯¹ä¸å¯¹
 
 //// Laplace Deformation - Rotate
 	toCaculateAdjacentVertices(&m.cm);
@@ -86,7 +85,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	printf("Faces = %d\n\n", static_cast<int>(Faces.size()));
 
 	get_LsTLs_Matrix();
-	printf("LsTLs ¾ØÕó¼ÆËãÍê³É\n");
+	printf("LsTLs çŸ©é˜µè®¡ç®—å®Œæˆ\n");
 
 	const int fix_anchors = fixed_anchor_idx.size(), move_anchors = move_anchor_idx.size(), points_num = Vertices.size();
 	VectorXf vx(points_num), vy(points_num);
@@ -95,8 +94,8 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 		vx[i] = Vertices[i].X();
 		vy[i] = Vertices[i].Y();
 	}
-	bx = L * vx;	// ¸ù¾İlaplace¾ØÕó¼ÆËã³öËùÓĞµãµÄµÄlaplace×ø±ê
-	by = L * vy;	// ¸ù¾İlaplace¾ØÕó¼ÆËã³öËùÓĞµãµÄµÄlaplace×ø±ê
+	bx = L * vx;	// æ ¹æ®laplaceçŸ©é˜µè®¡ç®—å‡ºæ‰€æœ‰ç‚¹çš„çš„laplaceåæ ‡
+	by = L * vy;	// æ ¹æ®laplaceçŸ©é˜µè®¡ç®—å‡ºæ‰€æœ‰ç‚¹çš„çš„laplaceåæ ‡
 
 	bx.conservativeResize(points_num + fix_anchors + move_anchors);
 	by.conservativeResize(points_num + fix_anchors + move_anchors);
@@ -107,7 +106,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 		by[i + points_num] = Vertices[fixed_anchor_idx[i]].Y();
 	}
 
-	const float angle = (15.0 * M_PI) / 180.0;	// Ã¿´ÎĞı×ª10¶È£¬²»ÄÜĞ´ 90 / 180 * pi£¬90/180 = 0.¡£
+	const float angle = (15.0 * M_PI) / 180.0;	// æ¯æ¬¡æ—‹è½¬10åº¦ï¼Œä¸èƒ½å†™ 90 / 180 * piï¼Œ90/180 = 0.ã€‚
 
 	// x_new = x * cos + y * sin
 	// y_new = -x * sin + y * cos
@@ -119,7 +118,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	}
 	LsTbx = LsT * bx;
 	LsTby = LsT * by;
-	printf("LsTb ¾ØÕó¼ÆËãÍê³É, Í¨¹ıcholesky·Ö½â£¬½âÏßĞÔ·½³Ì×é LsTLs * x = LsTb\n\n\n");
+	printf("LsTb çŸ©é˜µè®¡ç®—å®Œæˆ, é€šè¿‡choleskyåˆ†è§£ï¼Œè§£çº¿æ€§æ–¹ç¨‹ç»„ LsTLs * x = LsTb\n\n\n");
 
 	vx_new = LsTLs.llt().solve(LsTbx);
 	vy_new = LsTLs.llt().solve(LsTby);
@@ -132,7 +131,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 			m.cm.vert[i].P().X() = tx * cos(angle) + ty * sin(angle);
 			m.cm.vert[i].P().Y() = -tx * sin(angle) + ty * cos(angle);
 		}
-		else if (find(fixed_anchor_idx.begin(), fixed_anchor_idx.end(), i) == fixed_anchor_idx.end())	// ¼È²»ÊÇmoveµã£¬ÓÖ²»ÊÇ¹Ì¶¨µã
+		else if (find(fixed_anchor_idx.begin(), fixed_anchor_idx.end(), i) == fixed_anchor_idx.end())	// æ—¢ä¸æ˜¯moveç‚¹ï¼Œåˆä¸æ˜¯å›ºå®šç‚¹
 		{
 			m.cm.vert[i].P().X() = vx_new[i];
 			m.cm.vert[i].P().Y() = vy_new[i];
@@ -144,7 +143,7 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	tri::UpdateBounding<CMeshO>::Box(m.cm);
 	tri::UpdateNormal<CMeshO>::PerVertexNormalizedPerFaceNormalized(m.cm);
 
-	////// ËùÓĞupdate²Ù×÷
+	////// æ‰€æœ‰updateæ“ä½œ
 	gla->mvc()->sharedDataContext()->meshInserted(m.id());
 	MLRenderingData dt;
 	gla->mvc()->sharedDataContext()->getRenderInfoPerMeshView(m.id(), gla->context(), dt);
@@ -152,21 +151,21 @@ void EditLaplaceDeformationPlugin::ChimneyRotate(MeshModel &m)
 	MLPoliciesStandAloneFunctions::disableRedundatRenderingDataAccordingToPriorities(dt);
 	gla->mvc()->sharedDataContext()->setRenderingDataPerMeshView(m.id(), gla->context(), dt);
 	gla->update();
-	////// ËùÓĞupdate²Ù×÷
+	////// æ‰€æœ‰updateæ“ä½œ
 }
 
-// ´¦Àíµ±Ç°Ñ¡ÖĞÄ£ĞÍ
-/// Ê¹ÓÃresharper C++ ÓÅ»¯¹ıºóµÄĞÎ±ä´úÂë£¬¶Ô´«ÈëµÄ MeshModel ½øĞĞĞÎ±ä - GY 2018.12.17
+// å¤„ç†å½“å‰é€‰ä¸­æ¨¡å‹
+/// ä½¿ç”¨resharper C++ ä¼˜åŒ–è¿‡åçš„å½¢å˜ä»£ç ï¼Œå¯¹ä¼ å…¥çš„ MeshModel è¿›è¡Œå½¢å˜ - GY 2018.12.17
 bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSceneGLSharedDataContext* ctx)
 {
 	gla = _gla;
 
-//// ×öÑÌ´ÑĞı×ªÊµÑé 2018.8.31³É¹¦£¬µ«ÊÇ²»±£Ìå»ı£¬¶øÇÒĞı×ª¹ı¶àÃæÆ¬»áÓĞ×ÔÏà½»
+//// åšçƒŸå›±æ—‹è½¬å®éªŒ 2018.8.31æˆåŠŸï¼Œä½†æ˜¯ä¸ä¿ä½“ç§¯ï¼Œè€Œä¸”æ—‹è½¬è¿‡å¤šé¢ç‰‡ä¼šæœ‰è‡ªç›¸äº¤
 	//ChimneyRotate(m);
 	//return true;
-//// ×öÑÌ´ÑĞı×ªÊµÑé
+//// åšçƒŸå›±æ—‹è½¬å®éªŒ
 
-	// ÎªÊ²Ã´Ä£ĞÍÉÏÀ´¾ÍÓĞÑ¡ÖĞµÄµã£¿£¿±ØĞëÏÈClearS
+	// ä¸ºä»€ä¹ˆæ¨¡å‹ä¸Šæ¥å°±æœ‰é€‰ä¸­çš„ç‚¹ï¼Ÿï¼Ÿå¿…é¡»å…ˆClearS
 	/*for (CMeshO::VertexIterator vi = m.cm.vert.begin(); vi != m.cm.vert.end(); ++vi)
 	if (!vi->IsD() && vi->IsS())
 	{
@@ -174,13 +173,13 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 	cout << vi - m.cm.vert.begin() << endl;
 	}*/
 
-//// Iniatial ²¿·Ö
+//// Iniatial éƒ¨åˆ†
 	fixed_anchor_idx.clear();
 	move_anchor_idx.clear();
 	tri::UpdateSelection<CMeshO>::VertexClear(m.cm);
 	tri::UpdateSelection<CMeshO>::FaceClear(m.cm);
-	//tri::UpdateFlags<CMeshO>::FaceClearS(m.cm);		// ²»¶Ô
-	//tri::UpdateFlags<CMeshO>::VertexClearS(m.cm);		// ²»¶Ô
+	//tri::UpdateFlags<CMeshO>::FaceClearS(m.cm);		// ä¸å¯¹
+	//tri::UpdateFlags<CMeshO>::VertexClearS(m.cm);		// ä¸å¯¹
 
 	move_anchor_coord.resize(m.cm.vert.size());
 	for (auto& mac : move_anchor_coord)
@@ -189,11 +188,11 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 		mac.Y() = -1;
 		mac.Z() = -1;
 	}
-//// Iniatial ²¿·Ö
+//// Iniatial éƒ¨åˆ†
 
 	m.updateDataMask(MeshModel::MM_ALL);
 
-	// ¶ÁÈë fixed_anchor.txt ÎÄ¼ş£¬×÷Îª¹Ì¶¨Ãªµã
+	// è¯»å…¥ fixed_anchor.txt æ–‡ä»¶ï¼Œä½œä¸ºå›ºå®šé”šç‚¹
 	int tmp;
 	ifstream fix_a;
 	// C:\\Users\\Administrator\\Desktop\\fixed_anchor.txt
@@ -202,14 +201,14 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 		fixed_anchor_idx.push_back(tmp);
 	fix_a.close();
 
-	//// ¶ÁÈë move_anchor.txt ÎÄ¼ş£¬×÷ÎªÒÆ¶¯Ãªµã
+	//// è¯»å…¥ move_anchor.txt æ–‡ä»¶ï¼Œä½œä¸ºç§»åŠ¨é”šç‚¹
 	//ifstream move_a;
 	//move_a.open("C:\\Users\\Administrator\\Desktop\\move_anchor.txt");
 	//while (move_a >> tmp)
 	//	move_anchor_idx.push_back(tmp);
 	//move_a.close();
 
-	// ¶ÁÈë move_anchor_coord.txt ÎÄ¼ş£¬×÷ÎªÒÆ¶¯ÃªµãµÄĞÂ×ø±ê idx x y z
+	// è¯»å…¥ move_anchor_coord.txt æ–‡ä»¶ï¼Œä½œä¸ºç§»åŠ¨é”šç‚¹çš„æ–°åæ ‡ idx x y z
 
 	ifstream move_coord;
 	move_coord.open(R"(C:\\Users\\Administrator\\Desktop\\move_anchor_coord.txt)");
@@ -233,7 +232,7 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 	for (auto vi = m.cm.vert.begin(); vi != m.cm.vert.end(); ++vi) // CMeshO::VertexIterator
 	{
 		if (vi->IsD())
-			printf("µãÒÑ¾­±»É¾³ı\n");
+			printf("ç‚¹å·²ç»è¢«åˆ é™¤\n");
 		else
 		{
 			if (find(fixed_anchor_idx.begin(), fixed_anchor_idx.end(), static_cast<int>(vi - m.cm.vert.begin())) != fixed_anchor_idx.end())
@@ -242,16 +241,16 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 				vi->C() = vcg::Color4b(vcg::Color4b::Red);
 		}
 	}
-	printf("ÓĞ %d ¸öµã±»Ñ¡Îª¹Ì¶¨Ãªµã£¨À¶É«ÏÔÊ¾£©!\n", static_cast<int>(fixed_anchor_idx.size()));
-	printf("ÓĞ %d ¸öµã±»Ñ¡ÎªÒÆ¶¯Ãªµã£¨ºìÉ«ÏÔÊ¾£©!\n", static_cast<int>(move_anchor_idx.size()));
+	printf("æœ‰ %d ä¸ªç‚¹è¢«é€‰ä¸ºå›ºå®šé”šç‚¹ï¼ˆè“è‰²æ˜¾ç¤ºï¼‰!\n", static_cast<int>(fixed_anchor_idx.size()));
+	printf("æœ‰ %d ä¸ªç‚¹è¢«é€‰ä¸ºç§»åŠ¨é”šç‚¹ï¼ˆçº¢è‰²æ˜¾ç¤ºï¼‰!\n", static_cast<int>(move_anchor_idx.size()));
 
-	LaplaceDeformation(m); // ½øĞĞLaplaceĞÎ±ä
+	LaplaceDeformation(m); // è¿›è¡ŒLaplaceå½¢å˜
 
-	// ¼ì²éÓĞÃ»ÓĞ nan
+	// æ£€æŸ¥æœ‰æ²¡æœ‰ nan
 	//for (CMeshO::VertexIterator vi = m.cm.vert.begin(); vi != m.cm.vert.end(); vi++)
 	//	printf("%d - (%f, %f, %f)\n", vi - m.cm.vert.begin(), vi->P().X(), vi->P().Y(), vi->P().Z());
 
-////// ËùÓĞupdate²Ù×÷
+////// æ‰€æœ‰updateæ“ä½œ
 	gla->mvc()->sharedDataContext()->meshInserted(m.id());
 	MLRenderingData dt;
 	gla->mvc()->sharedDataContext()->getRenderInfoPerMeshView(m.id(), gla->context(), dt);
@@ -259,18 +258,18 @@ bool EditLaplaceDeformationPlugin::StartEdit(MeshModel & m, GLArea * _gla, MLSce
 	MLPoliciesStandAloneFunctions::disableRedundatRenderingDataAccordingToPriorities(dt);
 	gla->mvc()->sharedDataContext()->setRenderingDataPerMeshView(m.id(), gla->context(), dt);
 	gla->update();
-////// ËùÓĞupdate²Ù×÷
+////// æ‰€æœ‰updateæ“ä½œ
 
-///////////// ´«½øÀ´µÄÖ¸Õë²»ºÃÊ¹£¿£¿£¿£¿£¿// 2018.8.17£¬ÉÏ±ßµÄ´úÂë¿ÉÒÔ¸üĞÂÄ£ĞÍ£¬µ«ÊÇÏÂ±ßµÄÕâ¶Î²»ĞĞ
+///////////// ä¼ è¿›æ¥çš„æŒ‡é’ˆä¸å¥½ä½¿ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ// 2018.8.17ï¼Œä¸Šè¾¹çš„ä»£ç å¯ä»¥æ›´æ–°æ¨¡å‹ï¼Œä½†æ˜¯ä¸‹è¾¹çš„è¿™æ®µä¸è¡Œ
 	//ctx->meshInserted(m.id());
 	//MLRenderingData dt;
 	//ctx->getRenderInfoPerMeshView(m.id(), gla->context(), dt);
-	//// ĞèÒª×Ô¼ºÊµÏÖµÄ´¿Ğéº¯Êı
+	//// éœ€è¦è‡ªå·±å®ç°çš„çº¯è™šå‡½æ•°
 	//suggestedRenderingData(m, dt);
 	//MLPoliciesStandAloneFunctions::disableRedundatRenderingDataAccordingToPriorities(dt);
 	//ctx->setRenderingDataPerMeshView(m.id(), gla->context(), dt);
 	//gla->update();
-///////////// ´«½øÀ´µÄÖ¸Õë²»ºÃÊ¹£¿£¿£¿£¿£¿
+///////////// ä¼ è¿›æ¥çš„æŒ‡é’ˆä¸å¥½ä½¿ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 
 	return true;
 }
@@ -293,27 +292,27 @@ void EditLaplaceDeformationPlugin::LaplaceDeformation(MeshModel& m)
 	printf("Faces = %d\n\n", static_cast<int>(Faces.size()));
 
 	get_LsTLs_Matrix();
-	printf("LsTLs ¾ØÕó¼ÆËãÍê³É\n");
+	printf("LsTLs çŸ©é˜µè®¡ç®—å®Œæˆ\n");
 	get_LsTb_Matrix();
-	printf("LsTb ¾ØÕó¼ÆËãÍê³É, Í¨¹ıcholesky·Ö½â£¬½âÏßĞÔ·½³Ì×é LsTLs * x = LsTb\n");
+	printf("LsTb çŸ©é˜µè®¡ç®—å®Œæˆ, é€šè¿‡choleskyåˆ†è§£ï¼Œè§£çº¿æ€§æ–¹ç¨‹ç»„ LsTLs * x = LsTb\n");
 
-	// Í¨¹ıcholesky·Ö½â£¬½âÏßĞÔ·½³Ì×é Ax = b£¬¼´ LsTLs * x = LsTb
-	// Cholesky·Ö½âÊÇ°ÑÒ»¸ö¶Ô³ÆÕı¶¨(symmetric, positive definite)µÄ¾ØÕó±íÊ¾³ÉÒ»¸öÏÂÈı½Ç¾ØÕó L ºÍÆä×ªÖÃ LT µÄ³Ë»ıµÄ·Ö½â
-	// ĞèÒªÍ·ÎÄ¼ş #include <Eigen/Cholesky>
-	vx_new = LsTLs.ldlt().solve(LsTbx);	// ²»ÖªµÀllt().solve()ÎªÊ²Ã´»á³öÏÖnan
+	// é€šè¿‡choleskyåˆ†è§£ï¼Œè§£çº¿æ€§æ–¹ç¨‹ç»„ Ax = bï¼Œå³ LsTLs * x = LsTb
+	// Choleskyåˆ†è§£æ˜¯æŠŠä¸€ä¸ªå¯¹ç§°æ­£å®š(symmetric, positive definite)çš„çŸ©é˜µè¡¨ç¤ºæˆä¸€ä¸ªä¸‹ä¸‰è§’çŸ©é˜µ L å’Œå…¶è½¬ç½® LT çš„ä¹˜ç§¯çš„åˆ†è§£
+	// éœ€è¦å¤´æ–‡ä»¶ #include <Eigen/Cholesky>
+	vx_new = LsTLs.ldlt().solve(LsTbx);	// ä¸çŸ¥é“llt().solve()ä¸ºä»€ä¹ˆä¼šå‡ºç°nan
 	vy_new = LsTLs.ldlt().solve(LsTby);
 	vz_new = LsTLs.ldlt().solve(LsTbz);
-	printf("ĞÂµÄ×ø±ê¼ÆËãÍê³É\n");
+	printf("æ–°çš„åæ ‡è®¡ç®—å®Œæˆ\n");
 
 	setNewCoord(m);
-	printf("Ä£ĞÍ×ø±ê¸üĞÂÍê³É\n");
+	printf("æ¨¡å‹åæ ‡æ›´æ–°å®Œæˆ\n");
 
 	tri::UpdateBounding<CMeshO>::Box(m.cm);
 	tri::UpdateNormal<CMeshO>::PerVertexNormalizedPerFaceNormalized(m.cm);
 
 	const long t2 = GetTickCount();
 	const long time_used = (t2 - t1) * 1.0 / 1000;
-	printf("\nLaplaceĞÎ±äÍê³É£¬ÓÃÊ±: %dm %ds\n\n", time_used / 60, time_used % 60);
+	printf("\nLaplaceå½¢å˜å®Œæˆï¼Œç”¨æ—¶: %dm %ds\n\n", time_used / 60, time_used % 60);
 }
 
 void EditLaplaceDeformationPlugin::toCaculateAdjacentVertices(CMeshO* cm)
@@ -329,7 +328,7 @@ void EditLaplaceDeformationPlugin::toCaculateAdjacentVertices(CMeshO* cm)
 			{
 				const auto vInd = static_cast<int>(fi->V(k) - &*(cm->vert.begin()));
 				//if (cm->vert[vInd].IsD())
-				//	printf("µãÒÑ¾­±»É¾³ı");
+				//	printf("ç‚¹å·²ç»è¢«åˆ é™¤");
 				tri.push_back(vInd);
 			}
 			Faces.push_back(tri);
@@ -337,11 +336,11 @@ void EditLaplaceDeformationPlugin::toCaculateAdjacentVertices(CMeshO* cm)
 
 	CalculateAdjacentVertices(cm);
 
-	// Êä³öËùÓĞµãµÄ½üÁÚÊıÁ¿
+	// è¾“å‡ºæ‰€æœ‰ç‚¹çš„è¿‘é‚»æ•°é‡
 	/*for (int i = 0; i < AdjacentVertices.size(); i++)
-		printf("µÚ %d ¸öµãÓĞ %d ¸ö½üÁÚ\n", i, AdjacentVertices[i].size());*/
+		printf("ç¬¬ %d ä¸ªç‚¹æœ‰ %d ä¸ªè¿‘é‚»\n", i, AdjacentVertices[i].size());*/
 
-	// Êä³öËùÓĞµãÖÜÎ§µãµÄË÷Òı
+	// è¾“å‡ºæ‰€æœ‰ç‚¹å‘¨å›´ç‚¹çš„ç´¢å¼•
 	//for (int i = 0; i < AdjacentVertices.size(); i++)
 	//	for (int j = 0; j < AdjacentVertices[i].size(); j++)
 	//		printf("AdjacentVertices[%d][%d] = %d\n", i, j, AdjacentVertices[i][j]);
@@ -387,7 +386,7 @@ void EditLaplaceDeformationPlugin::get_LsTLs_Matrix()
 		{
 			if (i == j)
 			{
-				//printf("µÚ %d ¸öµãÓĞ %d ¸ö½üÁÚ\n", i, AdjacentVertices[i].size());
+				//printf("ç¬¬ %d ä¸ªç‚¹æœ‰ %d ä¸ªè¿‘é‚»\n", i, AdjacentVertices[i].size());
 				L(i, j) = AdjacentVertices[i].size();
 				Ls(i, j) = AdjacentVertices[i].size();
 				continue;
@@ -404,7 +403,7 @@ void EditLaplaceDeformationPlugin::get_LsTLs_Matrix()
 			}
 		}
 	}
-	// ¹Ì¶¨Ãªµã
+	// å›ºå®šé”šç‚¹
 	for (auto i = 0; i < fix_anchors; i++)
 		for (auto j = 0; j < points_num; j++)
 		{
@@ -413,7 +412,7 @@ void EditLaplaceDeformationPlugin::get_LsTLs_Matrix()
 			else
 				Ls(points_num + i, j) = 0;
 		}
-	// ÒÆ¶¯Ãªµã
+	// ç§»åŠ¨é”šç‚¹
 	for (auto i = 0; i < move_anchor_idx.size(); i++)
 		for (auto j = 0; j < points_num; j++)
 		{
@@ -421,15 +420,15 @@ void EditLaplaceDeformationPlugin::get_LsTLs_Matrix()
 			else            			 Ls(points_num + fix_anchors + i, j) = 0;
 		}
 
-	//printf("Laplace¾ØÕó - L\n");
+	//printf("LaplaceçŸ©é˜µ - L\n");
 	//cout << L << endl << endl;
 
-	//printf("Ìí¼ÓÁËÃªµãĞÅÏ¢µÄLaplace¾ØÕó - Ls\n");
+	//printf("æ·»åŠ äº†é”šç‚¹ä¿¡æ¯çš„LaplaceçŸ©é˜µ - Ls\n");
 	//cout << Ls << endl << endl;
 
-	printf("Laplace ¾ØÕó¼ÆËãÍê³É\n");
-	// ¾ØÕóÌ«´óÁË´òÓ¡³öÀ´¿´²»³öÀ´Ê²Ã´¶«Î÷
-	// ¼ì²éÒ»ÏÂ
+	printf("Laplace çŸ©é˜µè®¡ç®—å®Œæˆ\n");
+	// çŸ©é˜µå¤ªå¤§äº†æ‰“å°å‡ºæ¥çœ‹ä¸å‡ºæ¥ä»€ä¹ˆä¸œè¥¿
+	// æ£€æŸ¥ä¸€ä¸‹
 	//for (int i = 0; i < points_num; i++)
 	//{
 	//	int cnt = 0;
@@ -447,7 +446,7 @@ void EditLaplaceDeformationPlugin::get_LsTLs_Matrix()
 	LsT = Ls.transpose();
 	LsTLs = LsT * Ls;
 
-	// ²é¿´¾ØÕóĞÅÏ¢
+	// æŸ¥çœ‹çŸ©é˜µä¿¡æ¯
 	//printf("\nLsTLs\n");
 	//cout << LsTLs.rows() << "  " << LsTLs.cols() << endl;
 	//cout << LsTLs << endl;
@@ -466,8 +465,8 @@ void EditLaplaceDeformationPlugin::get_LsTb_Matrix()
 		vz[i] = Vertices[i].Z();
 	}
 
-	// ¸ù¾İlaplace¾ØÕó¼ÆËã³öËùÓĞµãµÄµÄlaplace×ø±ê
-	bx = L * vx;	// ³Ë¼¸´ÎÊÇ¼¸½×
+	// æ ¹æ®laplaceçŸ©é˜µè®¡ç®—å‡ºæ‰€æœ‰ç‚¹çš„çš„laplaceåæ ‡
+	bx = L * vx;	// ä¹˜å‡ æ¬¡æ˜¯å‡ é˜¶
 	by = L * vy;
 	bz = L * vz;
 
@@ -475,7 +474,7 @@ void EditLaplaceDeformationPlugin::get_LsTb_Matrix()
 	by.conservativeResize(points_num + fix_anchors + move_anchors);
 	bz.conservativeResize(points_num + fix_anchors + move_anchors);
 
-	// ÓÃĞÎ±äÇ°×ø±ê¶Ô¹Ì¶¨Ãªµã×ø±ê½øĞĞ¸³Öµ
+	// ç”¨å½¢å˜å‰åæ ‡å¯¹å›ºå®šé”šç‚¹åæ ‡è¿›è¡Œèµ‹å€¼
 	for (auto i = 0; i < fix_anchors; i++)
 	{
 		bx[i + points_num] = Vertices[fixed_anchor_idx[i]].X();
@@ -483,7 +482,7 @@ void EditLaplaceDeformationPlugin::get_LsTb_Matrix()
 		bz[i + points_num] = Vertices[fixed_anchor_idx[i]].Z();
 	}
 
-	// ÓÃĞÎ±äºó×ø±ê¶ÔÒÆ¶¯Ãªµã×ø±ê½øĞĞ¸³Öµ
+	// ç”¨å½¢å˜ååæ ‡å¯¹ç§»åŠ¨é”šç‚¹åæ ‡è¿›è¡Œèµ‹å€¼
 	for (auto i = 0; i < move_anchors; i++)
 	{
 		bx[i + points_num + fix_anchors] = move_anchor_coord[move_anchor_idx[i]].X();
@@ -491,7 +490,7 @@ void EditLaplaceDeformationPlugin::get_LsTb_Matrix()
 		bz[i + points_num + fix_anchors] = move_anchor_coord[move_anchor_idx[i]].Z();
 	}
 
-	// ¼ÆËãÈı¸öÖáÉÏµÄ LsTb ÏòÁ¿
+	// è®¡ç®—ä¸‰ä¸ªè½´ä¸Šçš„ LsTb å‘é‡
 	LsTbx = LsT * bx;
 	LsTby = LsT * by;
 	LsTbz = LsT * bz;
