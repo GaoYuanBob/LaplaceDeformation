@@ -5,8 +5,8 @@
 需要准备：
 
 1、要形变模型（MeshModel& m）,传入 StartEdit 函数  
-2、固定锚点文件 R"(C:\\Users\\Administrator\\Desktop\\fixed_anchor.txt)"，存放固定不动的点的索引，用空格或者换行分隔  
-3、移动锚点文件 R"(C:\\Users\\Administrator\\Desktop\\move_anchor_coord.txt)"，每行为 idx x y z 形式，idx 为移动锚点索引，x y z为这个点在形变后的坐标
+2、固定锚点txt文件(QFileDialog::getOpenFileName)，存放固定不动的点的索引，用空格或者换行分隔  
+3、移动锚点txt文件(QFileDialog::getOpenFileName)，每行为 idx x y z 形式，idx 为移动锚点索引，x y z为这个点在形变后的坐标
 
 注：  
 1、其中点的索引与 MeshLab 2016 保持一致，从0开始  
